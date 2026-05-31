@@ -1,0 +1,49 @@
+-- ============================================================
+-- EZESIM.ipkg : Idris2 package descriptor for EZESIM
+-- ============================================================
+-- Project  : EZESIM — Formally Verified Recursive ZK eSIM
+-- Purpose  : B2B2C eSIM provider privacy infrastructure
+-- Credit   : m26stephenson@uwaterloo.ca
+-- Author   : Louis Marie Mugisha
+-- Licence  : MIT
+-- ============================================================
+
+package ezesim
+
+-- The package name, used by idris2 --find-ipkg
+authors    = "Louis Marie Mugisha <m26stephenson@uwaterloo.ca>"
+version    = "0.1.0"
+brief      = "EZESIM: Formally Verified Recursive ZK eSIM B2B2C Provider"
+
+-- Source directory root
+sourcedir  = "src"
+
+-- Every module in the project, in dependency order.
+-- Idris2 resolves the graph; listing them here makes --build work.
+modules =
+  -- 1. Primitive mathematical foundations
+  EZESIM.Crypto.Field,
+  -- 2. Elliptic-curve group law (formally proved associativity)
+  EZESIM.Crypto.EllipticCurve,
+  -- 3. Pedersen commitment scheme (hiding + binding proofs)
+  EZESIM.Crypto.Commitment,
+  -- 4. Fiat–Shamir heuristic (non-interactive transform)
+  EZESIM.Crypto.FiatShamir,
+  -- 5. R1CS constraint system (the arithmetic circuit language)
+  EZESIM.ZKP.R1CS,
+  -- 6. SNARK verifier interface (abstract, implementation-agnostic)
+  EZESIM.ZKP.Verifier,
+  -- 7. Recursive proof combiner (the "recursive ZK" layer)
+  EZESIM.ZKP.Recursive,
+  -- 8. eSIM data model (ICCID, IMSI, profile lifecycle)
+  EZESIM.SIM.Profile,
+  -- 9. eSIM provisioning state machine (formally proved transitions)
+  EZESIM.SIM.Provisioning,
+  -- 10. Privacy-preserving eSIM activation (ZK-gated)
+  EZESIM.SIM.Activation,
+  -- 11. Hotel / travel-agency B2B data model
+  EZESIM.Hotel.GuestExperience,
+  -- 12. B2B2C distribution pipeline
+  EZESIM.Hotel.Distribution,
+  -- 13. Top-level system integration & main entry point
+  EZESIM.Main
